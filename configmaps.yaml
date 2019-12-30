@@ -1,0 +1,212 @@
+apiVersion: v1
+items:
+- apiVersion: v1
+  data:
+    city-bikes.py: |
+      import urllib2
+      import json
+
+      def find(request):
+          term = request.json["term"]
+          url = "https://feeds.capitalbikeshare.com/stations/stations.json"
+          response = urllib2.urlopen(url)
+          stations = json.loads(response.read())
+
+          hits = []
+
+          for station in stations["stationBeanList"]:
+              if station["stAddress1"].find(term) > -1:
+                  hits.append(station)
+
+          return json.dumps(hits)
+    handler: city-bikes.find
+    requirements.txt: ""
+  kind: ConfigMap
+  metadata:
+    creationTimestamp: null
+    labels:
+      created-by: kubeless
+      function: bikesearch
+    name: bikesearch
+    ownerReferences:
+    - apiVersion: kubeless.io/v1beta1
+      kind: Function
+      name: bikesearch
+      uid: 0f21706c-281b-11ea-83dd-005056804f91
+- apiVersion: v1
+  data:
+    handler: todos-create.create
+    package.json: |
+      {
+        "name": "todos",
+        "version": "0.1.0",
+        "description": "Todo service built with Serverless",
+        "scripts": {
+          "test": "echo \"Error: no test specified\" && exit 1"
+        },
+        "author": "",
+        "license": "MIT",
+        "dependencies": {
+          "lodash": "^4.17.4",
+          "mongodb": "^2.2.30",
+          "uuid": "^2.0.3"
+        },
+        "devDependencies": {
+          "serverless-kubeless": "^0.7.0"
+        }
+      }
+    todos-create: aaa
+  kind: ConfigMap
+  metadata:
+    creationTimestamp: null
+    labels:
+      created-by: kubeless
+      function: create
+    name: create
+    ownerReferences:
+    - apiVersion: kubeless.io/v1beta1
+      kind: Function
+      name: create
+      uid: 95746b9b-2b3d-11ea-83dd-005056804f91
+- apiVersion: v1
+  data:
+    handler: todos-delete.delete
+    package.json: |
+      {
+        "name": "todos",
+        "version": "0.1.0",
+        "description": "Todo service built with Serverless",
+        "scripts": {
+          "test": "echo \"Error: no test specified\" && exit 1"
+        },
+        "author": "",
+        "license": "MIT",
+        "dependencies": {
+          "lodash": "^4.17.4",
+          "mongodb": "^2.2.30",
+          "uuid": "^2.0.3"
+        },
+        "devDependencies": {
+          "serverless-kubeless": "^0.7.0"
+        }
+      }
+    todos-delete: ddd
+  kind: ConfigMap
+  metadata:
+    creationTimestamp: null
+    labels:
+      created-by: kubeless
+      function: delete
+    name: delete
+    ownerReferences:
+    - apiVersion: kubeless.io/v1beta1
+      kind: Function
+      name: delete
+      uid: 95788ddc-2b3d-11ea-83dd-005056804f91
+- apiVersion: v1
+  data:
+    handler: todos-read-all.readAll
+    package.json: |
+      {
+        "name": "todos",
+        "version": "0.1.0",
+        "description": "Todo service built with Serverless",
+        "scripts": {
+          "test": "echo \"Error: no test specified\" && exit 1"
+        },
+        "author": "",
+        "license": "MIT",
+        "dependencies": {
+          "lodash": "^4.17.4",
+          "mongodb": "^2.2.30",
+          "uuid": "^2.0.3"
+        },
+        "devDependencies": {
+          "serverless-kubeless": "^0.7.0"
+        }
+      }
+    todos-read-all: aaaa
+  kind: ConfigMap
+  metadata:
+    creationTimestamp: null
+    labels:
+      created-by: kubeless
+      function: read-all
+    name: read-all
+    ownerReferences:
+    - apiVersion: kubeless.io/v1beta1
+      kind: Function
+      name: read-all
+      uid: 95752f34-2b3d-11ea-83dd-005056804f91
+- apiVersion: v1
+  data:
+    handler: todos-read-one.readOne
+    package.json: |
+      {
+        "name": "todos",
+        "version": "0.1.0",
+        "description": "Todo service built with Serverless",
+        "scripts": {
+          "test": "echo \"Error: no test specified\" && exit 1"
+        },
+        "author": "",
+        "license": "MIT",
+        "dependencies": {
+          "lodash": "^4.17.4",
+          "mongodb": "^2.2.30",
+          "uuid": "^2.0.3"
+        },
+        "devDependencies": {
+          "serverless-kubeless": "^0.7.0"
+        }
+      }
+    todos-read-one: aaa
+  kind: ConfigMap
+  metadata:
+    creationTimestamp: null
+    labels:
+      created-by: kubeless
+      function: read-one
+    name: read-one
+    ownerReferences:
+    - apiVersion: kubeless.io/v1beta1
+      kind: Function
+      name: read-one
+      uid: 95777383-2b3d-11ea-83dd-005056804f91
+- apiVersion: v1
+  data:
+    handler: todos-update.update
+    package.json: |
+      {
+        "name": "todos",
+        "version": "0.1.0",
+        "description": "Todo service built with Serverless",
+        "scripts": {
+          "test": "echo \"Error: no test specified\" && exit 1"
+        },
+        "author": "",
+        "license": "MIT",
+        "dependencies": {
+          "lodash": "^4.17.4",
+          "mongodb": "^2.2.30",
+          "uuid": "^2.0.3"
+        },
+        "devDependencies": {
+          "serverless-kubeless": "^0.7.0"
+        }
+      }
+    todos-update: aaa
+  kind: ConfigMap
+  metadata:
+    creationTimestamp: null
+    labels:
+      created-by: kubeless
+      function: update
+    name: update
+    ownerReferences:
+    - apiVersion: kubeless.io/v1beta1
+      kind: Function
+      name: update
+      uid: 95761679-2b3d-11ea-83dd-005056804f91
+kind: List
+metadata: {}
